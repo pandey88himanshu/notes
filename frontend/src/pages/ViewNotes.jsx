@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const ViewNotes = () => {
   const navigate = useNavigate();
-  // const token = localStorage.getItem("access_token");
   const token = useSelector((state) => state.user.token);
   const location = useLocation();
   const [data, setData] = useState(null);
@@ -33,8 +33,10 @@ const ViewNotes = () => {
       );
       console.log(response);
       setData(response.data);
+      toast.success("updated successfully");
       navigate("/notes");
     } catch (error) {
+      toast.error("error in updation");
       console.log(error);
     }
   }
@@ -63,26 +65,31 @@ const ViewNotes = () => {
   }, [location.state, token]);
 
   return (
-    <div className="bg-[#021526] w-full min-h-screen text-white px-10">
+    <div className="bg-[#021526] w-full min-h-[92vh] text-white px-10 ">
       {data ? (
-        <div className="flex gap-3">
+        <div className="flex gap-3 flex-col pt-8 ">
           <input
             type="text"
             name="title"
             onChange={handleChange}
             value={update.title}
-            className="text-black"
+            className="text-black rounded-full px-3 py-2"
           />
           <input
             type="text"
             name="description"
             onChange={handleChange}
             value={update.description}
-            className="text-black"
+            className="text-black rounded-full px-3 py-2"
           />
 
           <div>
-            <button onClick={HandleUpdate}>Update</button>
+            <button
+              className="px-6 py-1 bg-[#FFDB00] hover:bg-[#d7bc25] text-black rounded-full"
+              onClick={HandleUpdate}
+            >
+              Update
+            </button>
           </div>
         </div>
       ) : (

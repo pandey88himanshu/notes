@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/userSlice";
-
+import { toast } from "react-toastify";
 const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,9 +33,11 @@ const SignIn = () => {
         const token = response.data.token;
         dispatch(setUser({ user, token }));
         localStorage.setItem("access_token", token);
+        toast.success("Login Successfully");
         navigate("/notes");
       }
     } catch (error) {
+      toast.error("Error In Login");
       console.error("Error signing in:", error);
       if (error.response) {
         console.error("Server responded with status:", error.response.status);
@@ -49,7 +51,7 @@ const SignIn = () => {
   }
 
   return (
-    <div className="bg-[#021526] w-full h-screen text-white">
+    <div className="bg-[#021526] w-full h-[92vh] text-white">
       <div className="px-12 h-full">
         <div className="w-full h-full flex items-center justify-center">
           <form onSubmit={HandleSubmit} className="flex flex-col gap-5">
@@ -80,7 +82,7 @@ const SignIn = () => {
             <div className="flex justify-between items-center">
               <button
                 type="submit"
-                className="px-6 py-2 bg-[#FFDB00] text-[#021526] font-medium text-lg rounded-full"
+                className="px-6 py-2 bg-[#FFDB00] hover:bg-[#d7bc25] text-[#021526] font-medium text-lg rounded-full"
               >
                 Submit
               </button>

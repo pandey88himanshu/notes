@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearUser, setUser } from "../redux/userSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -36,14 +37,20 @@ const NavBar = () => {
   const handleLogout = () => {
     dispatch(clearUser());
     localStorage.removeItem("access_token");
+    toast.success("Logout Sucessfully");
     navigate("/");
   };
 
   return (
-    <div>
+    <div className="h-[8vh] w-full bg-[#03346E] text-white px-10 flex items-center justify-between ">
       <div>{token ? `Logged in as ${user}` : "Not logged in"}</div>
       <div>
-        <button onClick={handleLogout}>LogOut</button>
+        <button
+          onClick={handleLogout}
+          className="px-6 py-1 bg-red-600 rounded-full border-none hover:bg-red-700 shadow-white shadow-sm hover:shadow-none"
+        >
+          LogOut
+        </button>
       </div>
     </div>
   );

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import AllNotes from "../components/AllNotes";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 const Notes = () => {
-  // const token = localStorage.getItem("access_token");
   const token = useSelector((state) => state.user.token);
   const [data, setData] = useState({
     title: "",
@@ -31,7 +31,9 @@ const Notes = () => {
         title: "",
         description: "",
       });
+      toast.success("Notes Created");
     } catch (error) {
+      toast.error("Error In Notes creation");
       console.log(error);
     }
   };
@@ -43,7 +45,6 @@ const Notes = () => {
           <div className="flex items-center justify-between">
             <div className="flex flex-col gap-4">
               <div>
-                {/* <label>Enter title</label> */}
                 <input
                   placeholder="Enter Title"
                   type="text"
@@ -54,7 +55,6 @@ const Notes = () => {
                 />
               </div>
               <div>
-                {/* <label>Enter Description</label> */}
                 <input
                   placeholder="Enter Description"
                   type="text"
@@ -68,7 +68,7 @@ const Notes = () => {
             <div>
               <button
                 type="submit"
-                className="px-6 py-2 bg-black text-white rounded-full shadow-white shadow-sm"
+                className="px-6 py-2 bg-black text-white rounded-full shadow-white shadow-sm hover:shadow-none"
               >
                 Submit
               </button>

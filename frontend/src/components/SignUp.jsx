@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { toast } from "react-toastify";
 const SignUp = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({
@@ -32,8 +32,10 @@ const SignUp = () => {
         password: "",
         username: "",
       });
+      toast.success("SignUp SuccessFully");
       navigate("/signin");
     } catch (error) {
+      toast.error("Error In signup");
       console.error("Error signing up:", error);
       if (error.response) {
         console.error("Server responded with status:", error.response.status);
@@ -48,7 +50,7 @@ const SignUp = () => {
 
   return (
     <>
-      <div className="bg-[#021526] w-full h-screen text-white">
+      <div className="bg-[#021526] w-full h-[92vh] text-white">
         <div className="px-12 h-full">
           <div className="w-full h-full flex items-center justify-center">
             <form
@@ -98,7 +100,7 @@ const SignUp = () => {
               <div className="flex justify-between items-center">
                 <button
                   type="submit"
-                  className="px-6 py-2 bg-[#FFDB00] text-[#021526] font-medium text-lg rounded-full"
+                  className="px-6 py-2 bg-[#FFDB00] hover:bg-[#d7bc25] text-[#021526] font-medium text-lg rounded-full"
                 >
                   Submit
                 </button>

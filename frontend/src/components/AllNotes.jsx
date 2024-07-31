@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const AllNotes = () => {
-  // const token = localStorage.getItem("access_token");
   const token = useSelector((state) => state.user.token);
 
   const navigate = useNavigate();
@@ -15,7 +15,9 @@ const AllNotes = () => {
         { headers: { authorization: token } }
       );
       console.log(response);
+      toast.success("Notes Deleated");
     } catch (error) {
+      toast.error("Error in Deleating");
       console.log(error);
     }
   }
@@ -28,7 +30,6 @@ const AllNotes = () => {
           `${import.meta.env.VITE_APP_URL}/api/v1/notes`,
           { headers: { authorization: token } }
         );
-        // console.log(response.data);
         setData(response.data);
       } catch (error) {
         console.log(error);
@@ -47,6 +48,7 @@ const AllNotes = () => {
               className="min-w-1/5 border-white border-2 px-4 mt-4 flex flex-col gap-4 py-2"
             >
               <div
+                className=" cursor-pointer"
                 onClick={() => {
                   navigate("/viewnotes", { state: item._id });
                 }}
@@ -58,7 +60,7 @@ const AllNotes = () => {
               </div>
               <div>
                 <button
-                  className="bg-red-600 text-white px-5 py-1 rounded-full"
+                  className="bg-red-600 text-white px-5 py-1 rounded-full hover:bg-red-700"
                   onClick={() => {
                     handleClick(item._id);
                   }}
