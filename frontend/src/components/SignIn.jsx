@@ -82,7 +82,7 @@ const SignIn = () => {
             <div className="flex justify-between items-center">
               <button
                 type="submit"
-                className="px-6 py-2 bg-[#FFDB00] hover:bg-[#d7bc25] text-[#021526] font-medium text-lg rounded-full"
+                className="px-7 py-2 bg-[#FFDB00] hover:bg-[#d7bc25] text-[#021526] font-medium text-lg rounded-full"
               >
                 Submit
               </button>
